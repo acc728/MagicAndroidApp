@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "964307662356",
+    "project_id": "magicandroidapp",
+    "storage_bucket": "magicandroidapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964307662356:android:368ff729f584cdfced1901",
+        "android_client_info": {
+          "package_name": "com.hiberus.magicandroidapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHvj8ZnFdUMUoS23-TKgwv3os51NaS_WU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
