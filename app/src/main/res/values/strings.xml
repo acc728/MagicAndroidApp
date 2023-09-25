@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">MagicAndroidApp</string>
+
+    <!-- General -->
+    <string name="search_placeholder">Search a card…</string>
+
+    <!-- TabFragment -->
+    <string name="search_cards">Search cards</string>
+    <string name="collection_cards">My collection</string>
+
+    <!-- Search Card Fragment -->
+    <string name="hello_blank_fragment1">Hello blank fragment1</string>
+
+    <!-- Collection Fragment -->
+    <string name="hello_blank_fragment2">Hello blank fragment2</string>
+
+
+
 </resources>

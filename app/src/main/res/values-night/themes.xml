@@ -7,5 +7,7 @@
     <style name="Base.Theme.MagicAndroidApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimaryDark"> @color/deep_black</item>
+        <item name="colorPrimary">@color/orange_deep</item>
     </style>
 </resources>

@@ -72,6 +72,9 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.2")
 
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
     //SharedPreferences
     implementation("androidx.preference:preference-ktx:1.2.1")
 
