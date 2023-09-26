@@ -9,4 +9,25 @@
         android:name="com.hiberus.magicandroidapp.presentation.fragment.CardSearchFragment"
         android:label="fragment_card_search"
         tools:layout="@layout/fragment_card_search" />
+
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.hiberus.magicandroidapp.presentation.fragment.CollectionFragment"
+        android:label="fragment_collection"
+        tools:layout="@layout/fragment_collection">
+        <action
+            android:id="@+id/action_collectionFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cardDetailFragment"
+        android:name="com.hiberus.magicandroidapp.presentation.fragment.CardDetailFragment"
+        android:label="fragment_card_detail"
+        tools:layout="@layout/fragment_card_detail">
+
+        <argument
+            android:name="cardId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

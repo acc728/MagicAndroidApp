@@ -5,18 +5,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.hiberus.magicandroidapp.R
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.hiberus.magicandroidapp.databinding.FragmentCollectionBinding
+import com.hiberus.magicandroidapp.presentation.adapter.CardListAdapter
 
 class CollectionFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
+    private var _binding: FragmentCollectionBinding? = null
+    private val binding get() = _binding!!
+
+    private val cardListAdapter = CardListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_collection, container, false)
+        _binding = FragmentCollectionBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initUI()
+    }
+
+    private fun initUI() {
+        binding.rvCardsCollection.adapter = cardListAdapter
+        binding.rvCardsCollection.layoutManager = LinearLayoutManager(requireContext())
+
+        cardListAdapter.onClickListener = { card ->
+            findNavController().navigate(
+                CollectionFragmentDirections.actionCollectionFragmentToCardDetailFragment(
+                    card.id.toInt()
+                )
+            )
+        }
     }
 }
