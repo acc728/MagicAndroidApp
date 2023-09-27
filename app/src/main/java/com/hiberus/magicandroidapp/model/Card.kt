@@ -62,7 +62,8 @@ data class Card (
     val pennyRank: Long,
     val prices: Prices,
     val relatedUris: RelatedUris,
-    val purchaseUris: PurchaseUris
+    val purchaseUris: PurchaseUris,
+    var comments: String = ""
 )
 
 @Keep
