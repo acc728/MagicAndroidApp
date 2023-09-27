@@ -5,18 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.hiberus.magicandroidapp.R
+import com.hiberus.magicandroidapp.databinding.FragmentCardSearchBinding
+import com.hiberus.magicandroidapp.presentation.viewmodel.CardsViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class CardSearchFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
+    private var _binding: FragmentCardSearchBinding? = null
+    private val binding get() = _binding!!
+
+    private val notesViewModel: CardsViewModel by activityViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card_search, container, false)
+        _binding = FragmentCardSearchBinding.inflate(inflater)
+        return binding.root
     }
 }
