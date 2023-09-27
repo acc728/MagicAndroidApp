@@ -1,67 +1,25 @@
 package com.hiberus.magicandroidapp.model
 
 import androidx.annotation.Keep
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
 @Keep
+@Entity(tableName = "cards")
 data class Card (
     val welcomeObject: String,
-    val id: String,
+    @PrimaryKey val id: String,
     val oracleID: String,
-    val multiverseIDS: List<Long>,
-    val tcgplayerID: Long,
-    val cardmarketID: Long,
     val name: String,
-    val lang: String,
-    val releasedAt: String,
-    val uri: String,
-    val scryfallURI: String,
-    val layout: String,
-    val highresImage: Boolean,
-    val imageStatus: String,
     val imageUris: ImageUris,
     val manaCost: String,
-    val cmc: Long,
-    val typeLine: String,
     val oracleText: String,
     val colors: List<String>,
-    val colorIdentity: List<String>,
-    val keywords: List<Any?>,
-    val legalities: Legalities,
-    val games: List<String>,
-    val reserved: Boolean,
-    val foil: Boolean,
-    val nonfoil: Boolean,
-    val finishes: List<String>,
-    val oversized: Boolean,
-    val promo: Boolean,
-    val reprint: Boolean,
-    val variation: Boolean,
-    val setID: String,
-    val set: String,
     val setName: String,
-    val setType: String,
-    val setURI: String,
-    val setSearchURI: String,
-    val scryfallSetURI: String,
-    val rulingsURI: String,
-    val printsSearchURI: String,
-    val collectorNumber: String,
-    val digital: Boolean,
-    val rarity: String,
-    val cardBackID: String,
-    val artist: String,
-    val artistIDS: List<String>,
-    val illustrationID: String,
-    val borderColor: String,
-    val frame: String,
-    val securityStamp: String,
-    val fullArt: Boolean,
-    val textless: Boolean,
-    val booster: Boolean,
-    val storySpotlight: Boolean,
-    val edhrecRank: Long,
-    val pennyRank: Long,
     val prices: Prices,
-    val relatedUris: RelatedUris,
     val purchaseUris: PurchaseUris,
     var comments: String = ""
 )
@@ -74,31 +32,6 @@ data class ImageUris (
     val png: String,
     val artCrop: String,
     val borderCrop: String
-)
-
-@Keep
-data class Legalities (
-    val standard: String,
-    val future: String,
-    val historic: String,
-    val gladiator: String,
-    val pioneer: String,
-    val explorer: String,
-    val modern: String,
-    val legacy: String,
-    val pauper: String,
-    val vintage: String,
-    val penny: String,
-    val commander: String,
-    val oathbreaker: String,
-    val brawl: String,
-    val historicbrawl: String,
-    val alchemy: String,
-    val paupercommander: String,
-    val duel: String,
-    val oldschool: String,
-    val premodern: String,
-    val predh: String
 )
 
 @Keep
@@ -118,10 +51,46 @@ data class PurchaseUris (
     val cardhoarder: String
 )
 
-@Keep
-data class RelatedUris (
-    val gatherer: String,
-    val tcgplayerInfiniteArticles: String,
-    val tcgplayerInfiniteDecks: String,
-    val edhrec: String
-)
+class Converters {
+
+    @TypeConverter
+    fun gsonToImagesUris(json: String?): ImageUris? {
+        return Gson().fromJson(json, ImageUris::class.java)
+    }
+
+    @TypeConverter
+    fun imageUrisToGson(imageUris: ImageUris): String? {
+        return Gson().toJson(imageUris)
+    }
+
+    @TypeConverter
+    fun gsonToPrices(json: String?): Prices? {
+        return Gson().fromJson(json, Prices::class.java)
+    }
+
+    @TypeConverter
+    fun pricesToGson(prices: Prices): String? {
+        return Gson().toJson(prices)
+    }
+
+    @TypeConverter
+    fun gsonToPurchasesUris(json: String?): PurchaseUris? {
+        return Gson().fromJson(json, PurchaseUris::class.java)
+    }
+
+    @TypeConverter
+    fun purchasesUrisToGson(purchaseUris: PurchaseUris): String? {
+        return Gson().toJson(purchaseUris)
+    }
+
+    @TypeConverter
+    fun gsonToListStringColors(json: String?): List<String>? {
+        val listType = object : TypeToken<List<String>>() {}.type
+        return Gson().fromJson(json, listType)
+    }
+
+    @TypeConverter
+    fun listStringColorsToGson(colors: List<String>): String? {
+        return Gson().toJson(colors)
+    }
+}
