@@ -10,15 +10,16 @@ import com.google.gson.reflect.TypeToken
 @Keep
 @Entity(tableName = "cards")
 data class Card (
-    val welcomeObject: String,
     @PrimaryKey val id: String,
-    val oracleID: String,
     val name: String,
-    val imageUris: ImageUris,
-    val manaCost: String,
-    val oracleText: String,
+    val lang: String,
+    val uri: String,
+    val imageUris: ImageUris,  // No funciona correctamente
+    val cmc: Long,
+    val typeLine: String,
+    val oracleText: String, // No funciona correctamente
     val colors: List<String>,
-    val setName: String,
+    val setName: String,  // No funciona correctamente
     val prices: Prices,
     val purchaseUris: PurchaseUris,
     var comments: String = ""
@@ -62,7 +63,6 @@ class Converters {
     fun imageUrisToGson(imageUris: ImageUris): String? {
         return Gson().toJson(imageUris)
     }
-
     @TypeConverter
     fun gsonToPrices(json: String?): Prices? {
         return Gson().fromJson(json, Prices::class.java)

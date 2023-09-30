@@ -29,8 +29,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_card_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -38,7 +37,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_autocomplete_card_search"
         app:layout_constraintBottom_toTopOf="@id/ll_buttons_card"
-        android:layout_margin="20dp"/>
+        android:layout_margin="@dimen/vertical_margin"
+        app:shapeAppearanceOverlay="@style/RoundedImageViewRounded"
+        android:src="@drawable/img_magic_cardback"/>
 
     <LinearLayout
         android:id="@+id/ll_buttons_card"

@@ -13,7 +13,10 @@ import com.hiberus.magicandroidapp.domain.usecases.DeleteCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.EditCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetCardAutocompleteUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetCardUseCase
+import com.hiberus.magicandroidapp.domain.usecases.GetRandomCardUseCase
+import com.hiberus.magicandroidapp.presentation.viewmodel.CardsViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val baseModule = module {
@@ -38,6 +41,7 @@ val cardsModule = module {
     factory { EditCardUseCase(get()) }
     factory { GetCardUseCase(get()) }
     factory { GetCardAutocompleteUseCase(get()) }
+    factory { GetRandomCardUseCase(get()) }
 
-    //viewModel { NotesViewModel(get(), get(), get(), get(), get()) }
+    viewModel { CardsViewModel(get(), get(), get(), get(), get(), get()) }
 }
