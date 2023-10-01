@@ -8,6 +8,8 @@ interface CardRepository {
 
     suspend fun getCardsAutocomplete(cardName: String): List<String>
 
+    suspend fun getCardByName(cardName: String): Card
+
     fun getCard(cardId: Int): Card
 
     fun addCard(card: Card)

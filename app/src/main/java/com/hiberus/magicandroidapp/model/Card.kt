@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 
 @Keep
@@ -14,14 +15,14 @@ data class Card (
     val name: String,
     val lang: String,
     val uri: String,
-    val imageUris: ImageUris,  // No funciona correctamente
+    @SerializedName("image_uris") val imageUris: ImageUris,  // No funciona correctamente
     val cmc: Long,
-    val typeLine: String,
-    val oracleText: String, // No funciona correctamente
+    @SerializedName("type_line") val typeLine: String,
+    @SerializedName("oracle_text") val oracleText: String, // No funciona correctamente
     val colors: List<String>,
-    val setName: String,  // No funciona correctamente
+    @SerializedName("set_name") val setName: String,  // No funciona correctamente
     val prices: Prices,
-    val purchaseUris: PurchaseUris,
+    @SerializedName("purchase_uris") val purchaseUris: PurchaseUris,
     var comments: String = ""
 )
 
@@ -50,6 +51,13 @@ data class PurchaseUris (
     val tcgplayer: String,
     val cardmarket: String,
     val cardhoarder: String
+)
+
+@Keep
+data class AutocompleteCardsResult (
+    val welcomeObject: String,
+    val totalValues: Long,
+    val data: List<String>
 )
 
 class Converters {

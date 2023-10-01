@@ -12,6 +12,7 @@ import com.hiberus.magicandroidapp.domain.usecases.AddCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.DeleteCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.EditCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetCardAutocompleteUseCase
+import com.hiberus.magicandroidapp.domain.usecases.GetCardByNameUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetRandomCardUseCase
 import com.hiberus.magicandroidapp.presentation.viewmodel.CardsViewModel
@@ -42,6 +43,7 @@ val cardsModule = module {
     factory { GetCardUseCase(get()) }
     factory { GetCardAutocompleteUseCase(get()) }
     factory { GetRandomCardUseCase(get()) }
+    factory { GetCardByNameUseCase(get()) }
 
-    viewModel { CardsViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { CardsViewModel(get(), get(), get(), get(), get(), get(), get()) }
 }

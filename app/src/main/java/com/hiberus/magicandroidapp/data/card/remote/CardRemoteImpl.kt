@@ -12,6 +12,10 @@ class CardRemoteImpl(
     }
 
     suspend fun getCardsAutocomplete(cardName: String): List<String> {
-        return cardMagicService.getCardsAutocomplete(cardName)
+        return cardMagicService.getCardsAutocomplete(cardName).data
+    }
+
+    suspend fun getCardByName(cardName: String): Card {
+        return cardMagicService.getCardByName(cardName)
     }
 }

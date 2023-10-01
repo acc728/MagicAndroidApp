@@ -29,6 +29,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_card_image"
         android:layout_width="0dp"
@@ -40,6 +41,20 @@
         android:layout_margin="@dimen/vertical_margin"
         app:shapeAppearanceOverlay="@style/RoundedImageViewRounded"
         android:src="@drawable/img_magic_cardback"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_card_search"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_animation_magic"/>
 
     <LinearLayout
         android:id="@+id/ll_buttons_card"

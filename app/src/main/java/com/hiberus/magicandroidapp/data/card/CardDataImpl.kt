@@ -17,6 +17,10 @@ class CardDataImpl(
         return cardRemoteImpl.getCardsAutocomplete(cardName)
     }
 
+    override suspend fun getCardByName(cardName: String): Card {
+        return cardRemoteImpl.getCardByName(cardName)
+    }
+
     override fun getCard(cardId: Int): Card {
         return cardLocalImpl.getCard(cardId)
     }

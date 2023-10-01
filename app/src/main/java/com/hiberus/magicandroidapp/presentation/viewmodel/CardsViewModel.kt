@@ -8,6 +8,7 @@ import com.hiberus.magicandroidapp.domain.usecases.AddCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.DeleteCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.EditCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetCardAutocompleteUseCase
+import com.hiberus.magicandroidapp.domain.usecases.GetCardByNameUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetRandomCardUseCase
 import com.hiberus.magicandroidapp.model.Card
@@ -23,6 +24,7 @@ typealias GetCardState = ResourceState<Card>
 typealias AddCardState = ResourceState<Void?>
 typealias DeleteCardState = ResourceState<Void?>
 typealias EditCardState = ResourceState<Void?>
+typealias GetCardByNameState = ResourceState<Card>
 
 class CardsViewModel(
     private val getCardAutocompleteUseCase: GetCardAutocompleteUseCase,
@@ -30,7 +32,8 @@ class CardsViewModel(
     private val getCardUseCase: GetCardUseCase,
     private val addCardUseCase: AddCardUseCase,
     private val deleteCardUseCase: DeleteCardUseCase,
-    private val editCardUseCase: EditCardUseCase
+    private val editCardUseCase: EditCardUseCase,
+    private val getCardByNameUseCase: GetCardByNameUseCase
 ): ViewModel() {
 
     private val _randomCardLiveData = MutableLiveData<RandomCardState>()
@@ -50,6 +53,9 @@ class CardsViewModel(
 
     private val _editCardLiveData = MutableLiveData<EditCardState>()
     val editCardLiveData: LiveData<EditCardState> get() = _editCardLiveData
+
+    private val _getCardByNameLiveData = MutableLiveData<GetCardByNameState>()
+    val getCardByNameLiveData: LiveData<GetCardByNameState> get() = _getCardByNameLiveData
 
     fun fetchRandomCard() {
         _randomCardLiveData.value = ResourceState.Loading()
@@ -86,6 +92,26 @@ class CardsViewModel(
                 withContext(Dispatchers.Main) {
                     _cardAutocompleteLiveData.value = ResourceState.Error(e.localizedMessage.orEmpty())
                     _cardAutocompleteLiveData.value = ResourceState.None()
+                }
+            }
+        }
+    }
+
+    fun fetchSearchCard(cardName: String) {
+        _getCardByNameLiveData.value = ResourceState.Loading()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val card = getCardByNameUseCase.execute(cardName)
+
+                withContext(Dispatchers.Main) {
+                    _getCardByNameLiveData.value = ResourceState.Success(card)
+                    _getCardByNameLiveData.value = ResourceState.None()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _getCardByNameLiveData.value = ResourceState.Error(e.localizedMessage.orEmpty())
+                    _getCardByNameLiveData.value = ResourceState.None()
                 }
             }
         }
