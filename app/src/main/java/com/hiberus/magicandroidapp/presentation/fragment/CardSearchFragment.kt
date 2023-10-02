@@ -14,7 +14,10 @@ import com.hiberus.magicandroidapp.R
 import com.hiberus.magicandroidapp.databinding.FragmentCardSearchBinding
 import com.hiberus.magicandroidapp.model.Card
 import com.hiberus.magicandroidapp.model.ResourceState
+import com.hiberus.magicandroidapp.presentation.viewmodel.AddCardState
+import com.hiberus.magicandroidapp.presentation.viewmodel.CardAutocompleteState
 import com.hiberus.magicandroidapp.presentation.viewmodel.CardsViewModel
+import com.hiberus.magicandroidapp.presentation.viewmodel.RandomCardState
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class CardSearchFragment : Fragment() {
@@ -30,7 +33,7 @@ class CardSearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCardSearchBinding.inflate(inflater)
         return binding.root
     }
@@ -54,6 +57,10 @@ class CardSearchFragment : Fragment() {
 
         cardsViewModel.getCardByNameLiveData.observe(viewLifecycleOwner) { state ->
             handleLoadCardState(state)
+        }
+
+        cardsViewModel.addCardLiveData.observe(viewLifecycleOwner) { state ->
+            handleAddCardState(state)
         }
     }
 
@@ -88,7 +95,6 @@ class CardSearchFragment : Fragment() {
 
                 binding.atvSearchCard.setAdapter(autocompleteCardsAdapter)
             }
-
         }
 
         binding.atvSearchCard.setOnItemClickListener { _, _, position, _ ->
@@ -101,14 +107,17 @@ class CardSearchFragment : Fragment() {
             }
         }
 
+        binding.btnAddCollection.setOnClickListener {
+           saveCard()
+        }
+
     }
 
-    private fun handleLoadCardState(state: ResourceState<Card>?) {
+    private fun handleLoadCardState(state: RandomCardState?) {
         when (state) {
             is ResourceState.Loading -> {
                 binding.ivCardImage.visibility = View.GONE
                 binding.lavCardSearch.visibility = View.VISIBLE
-
             }
 
             is ResourceState.Success -> {
@@ -131,7 +140,7 @@ class CardSearchFragment : Fragment() {
         }
     }
 
-    private fun handleAutocompleteCardState(state: ResourceState<List<String>>?) {
+    private fun handleAutocompleteCardState(state: CardAutocompleteState?) {
         when (state) {
             is ResourceState.Loading -> {
                 //
@@ -146,6 +155,37 @@ class CardSearchFragment : Fragment() {
             }
 
             else -> {}
+        }
+    }
+
+    private fun handleAddCardState(state: AddCardState?) {
+        when (state) {
+            is ResourceState.Loading -> {
+                //
+            }
+
+            is ResourceState.Success -> {
+                Toast.makeText(requireContext(),
+                    getString(R.string.msg_card_added_to_colecction), Toast.LENGTH_SHORT).show()
+                cardsViewModel.fetchCardList()
+            }
+
+            is ResourceState.Error -> {
+                Log.i("AddError",state.error)
+                Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
+            }
+
+            else -> {}
+        }
+    }
+
+    private fun saveCard() {
+        if(card != null) {
+            card?.comments = ""
+            cardsViewModel.addCard(card!!)
+        }else {
+            Toast.makeText(requireContext(),
+                getString(R.string.msg_error_add_card_to_collection), Toast.LENGTH_SHORT).show()
         }
     }
 

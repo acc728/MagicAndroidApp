@@ -9,12 +9,13 @@ import com.hiberus.magicandroidapp.model.Card
 
 class CardListAdapter : RecyclerView.Adapter<CardListAdapter.CardListViewHolder>() {
 
-    private var cardList: List<Card> = emptyList()
+    var cardList: ArrayList<Card> = ArrayList()
 
     var onClickListener: (Card) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardListViewHolder {
-        val binding = RowCardListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            RowCardListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CardListViewHolder(binding)
     }
 
@@ -24,6 +25,7 @@ class CardListAdapter : RecyclerView.Adapter<CardListAdapter.CardListViewHolder>
 
     override fun onBindViewHolder(holder: CardListViewHolder, position: Int) {
         val item = cardList[position]
+        val images = item.imageUris
 
         holder.rootView.setOnClickListener {
             onClickListener.invoke(item)
@@ -33,14 +35,26 @@ class CardListAdapter : RecyclerView.Adapter<CardListAdapter.CardListViewHolder>
         holder.cardDescription.text = item.oracleText
 
         Glide.with(holder.cardImageView)
-            .load(item.imageUris.artCrop)
+            .load(
+                if (!images.artCrop.isNullOrEmpty())
+                    images.artCrop
+                else
+                    images.normal
+            )
             .into(holder.cardImageView)
     }
 
-    inner class CardListViewHolder(binding: RowCardListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class CardListViewHolder(binding: RowCardListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val rootView = binding.root
         val cardName = binding.tvCardNameList
         val cardImageView = binding.ivCardImageList
         val cardDescription = binding.tvCardDescriptionList
+    }
+
+    fun submitList(list: List<Card>) {
+        cardList.clear()
+        cardList.addAll(list)
+        notifyDataSetChanged()
     }
 }

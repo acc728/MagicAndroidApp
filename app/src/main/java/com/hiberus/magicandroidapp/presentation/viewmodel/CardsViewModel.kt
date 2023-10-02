@@ -9,6 +9,7 @@ import com.hiberus.magicandroidapp.domain.usecases.DeleteCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.EditCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetCardAutocompleteUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetCardByNameUseCase
+import com.hiberus.magicandroidapp.domain.usecases.GetCardListUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetCardUseCase
 import com.hiberus.magicandroidapp.domain.usecases.GetRandomCardUseCase
 import com.hiberus.magicandroidapp.model.Card
@@ -25,6 +26,7 @@ typealias AddCardState = ResourceState<Void?>
 typealias DeleteCardState = ResourceState<Void?>
 typealias EditCardState = ResourceState<Void?>
 typealias GetCardByNameState = ResourceState<Card>
+typealias GetCardListState = ResourceState<List<Card>>
 
 class CardsViewModel(
     private val getCardAutocompleteUseCase: GetCardAutocompleteUseCase,
@@ -33,7 +35,8 @@ class CardsViewModel(
     private val addCardUseCase: AddCardUseCase,
     private val deleteCardUseCase: DeleteCardUseCase,
     private val editCardUseCase: EditCardUseCase,
-    private val getCardByNameUseCase: GetCardByNameUseCase
+    private val getCardByNameUseCase: GetCardByNameUseCase,
+    private val getCardListUseCase: GetCardListUseCase
 ): ViewModel() {
 
     private val _randomCardLiveData = MutableLiveData<RandomCardState>()
@@ -41,6 +44,9 @@ class CardsViewModel(
 
     private val _cardAutocompleteLiveData = MutableLiveData<CardAutocompleteState>()
     val cardAutocompleteLiveData: LiveData<CardAutocompleteState> get() = _cardAutocompleteLiveData
+
+    private val _getCardByNameLiveData = MutableLiveData<GetCardByNameState>()
+    val getCardByNameLiveData: LiveData<GetCardByNameState> get() = _getCardByNameLiveData
 
     private val _getCardLiveData = MutableLiveData<GetCardState>()
     val getCardLiveData: LiveData<GetCardState> get() = _getCardLiveData
@@ -54,8 +60,9 @@ class CardsViewModel(
     private val _editCardLiveData = MutableLiveData<EditCardState>()
     val editCardLiveData: LiveData<EditCardState> get() = _editCardLiveData
 
-    private val _getCardByNameLiveData = MutableLiveData<GetCardByNameState>()
-    val getCardByNameLiveData: LiveData<GetCardByNameState> get() = _getCardByNameLiveData
+    private val _getCardListLiveData = MutableLiveData<GetCardListState>()
+    val getCardListLiveData: LiveData<GetCardListState> get() = _getCardListLiveData
+
 
     fun fetchRandomCard() {
         _randomCardLiveData.value = ResourceState.Loading()
@@ -82,10 +89,10 @@ class CardsViewModel(
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val cards = getCardAutocompleteUseCase.execute(cardName)
+                val cardsNames = getCardAutocompleteUseCase.execute(cardName)
 
                 withContext(Dispatchers.Main) {
-                    _cardAutocompleteLiveData.value = ResourceState.Success(cards)
+                    _cardAutocompleteLiveData.value = ResourceState.Success(cardsNames)
                     _cardAutocompleteLiveData.value = ResourceState.None()
                 }
             } catch (e: Exception) {
@@ -112,6 +119,26 @@ class CardsViewModel(
                 withContext(Dispatchers.Main) {
                     _getCardByNameLiveData.value = ResourceState.Error(e.localizedMessage.orEmpty())
                     _getCardByNameLiveData.value = ResourceState.None()
+                }
+            }
+        }
+    }
+
+    fun fetchCardList() {
+        _getCardListLiveData.value = ResourceState.Loading()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val cardList = getCardListUseCase.execute()
+
+                withContext(Dispatchers.Main) {
+                    _getCardListLiveData.value = ResourceState.Success(cardList)
+                    _getCardListLiveData.value = ResourceState.None()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _getCardListLiveData.value = ResourceState.Error(e.localizedMessage.orEmpty())
+                    _getCardListLiveData.value = ResourceState.None()
                 }
             }
         }

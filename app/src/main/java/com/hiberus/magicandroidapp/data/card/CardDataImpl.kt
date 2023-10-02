@@ -21,6 +21,10 @@ class CardDataImpl(
         return cardRemoteImpl.getCardByName(cardName)
     }
 
+    override suspend fun getCardList(): List<Card> {
+        return cardLocalImpl.getCardList()
+    }
+
     override fun getCard(cardId: Int): Card {
         return cardLocalImpl.getCard(cardId)
     }

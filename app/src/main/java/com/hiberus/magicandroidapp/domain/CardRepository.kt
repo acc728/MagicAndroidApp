@@ -10,6 +10,8 @@ interface CardRepository {
 
     suspend fun getCardByName(cardName: String): Card
 
+    suspend fun getCardList(): List<Card>
+
     fun getCard(cardId: Int): Card
 
     fun addCard(card: Card)

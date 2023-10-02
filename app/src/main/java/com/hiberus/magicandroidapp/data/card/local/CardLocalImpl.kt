@@ -7,6 +7,10 @@ class CardLocalImpl(
     private val appDatabase: AppDatabase
 ) {
 
+    fun getCardList() : List<Card> {
+        return appDatabase.cardsDao().getCardList()
+    }
+
     fun getCard(cardId: Int): Card {
         return appDatabase.cardsDao().getCard(cardId)
     }
