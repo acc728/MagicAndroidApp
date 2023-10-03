@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hiberus.magicandroidapp.R
 import com.hiberus.magicandroidapp.databinding.FragmentCollectionBinding
+import com.hiberus.magicandroidapp.model.Card
 import com.hiberus.magicandroidapp.model.ResourceState
 import com.hiberus.magicandroidapp.presentation.adapter.CardListAdapter
 import com.hiberus.magicandroidapp.presentation.viewmodel.CardsViewModel
@@ -28,6 +30,9 @@ class CollectionFragment : Fragment() {
 
     private val cardsViewModel: CardsViewModel by activityViewModel()
 
+    private lateinit var cardsFiltered : List<Card>
+    private lateinit var listCards : ArrayList<Card>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +46,7 @@ class CollectionFragment : Fragment() {
 
         initViewModel()
         initRecyclerView()
+        initUI()
     }
 
     private fun initViewModel() {
@@ -56,43 +62,23 @@ class CollectionFragment : Fragment() {
         cardsViewModel.fetchCardList()
     }
 
-    private fun handleDeleteCardState(state: DeleteCardState?) {
-        when (state) {
-            is ResourceState.Loading -> {
-                //
+    private fun initUI() {
+
+        binding.atvFilterCard.addTextChangedListener {
+            val filteredText = binding.atvFilterCard.text.toString()
+
+            if (filteredText.isNotBlank() || cardsFiltered.isEmpty()) {
+                cardsFiltered = listCards.filter { card ->
+                    card.name.lowercase().contains(filteredText.lowercase())
+                }
+
+                cardListAdapter.cardList = ArrayList(cardsFiltered)
+
+            } else {
+                cardsViewModel.fetchCardList()
             }
 
-            is ResourceState.Success -> {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.msg_card_deleted_succesfully),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-            is ResourceState.Error -> {
-                Toast.makeText(requireContext(), state.error, Toast.LENGTH_LONG).show()
-            }
-
-            else -> {}
-        }
-    }
-
-    private fun handleGetCardListState(state: GetCardListState?) {
-        when (state) {
-            is ResourceState.Loading -> {
-                //
-            }
-
-            is ResourceState.Success -> {
-                cardListAdapter.submitList(state.result)
-            }
-
-            is ResourceState.Error -> {
-                Toast.makeText(requireContext(), state.error, Toast.LENGTH_LONG).show()
-            }
-
-            else -> {}
+            cardListAdapter.notifyDataSetChanged()
         }
     }
 
@@ -131,5 +117,46 @@ class CollectionFragment : Fragment() {
             })
 
         itemTouchHelper.attachToRecyclerView(binding.rvCardsCollection)
+    }
+
+    private fun handleDeleteCardState(state: DeleteCardState?) {
+        when (state) {
+            is ResourceState.Loading -> {
+                //
+            }
+
+            is ResourceState.Success -> {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.msg_card_deleted_succesfully),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            is ResourceState.Error -> {
+                Toast.makeText(requireContext(), state.error, Toast.LENGTH_LONG).show()
+            }
+
+            else -> {}
+        }
+    }
+
+    private fun handleGetCardListState(state: GetCardListState?) {
+        when (state) {
+            is ResourceState.Loading -> {
+                //
+            }
+
+            is ResourceState.Success -> {
+                cardListAdapter.submitList(state.result)
+                listCards = cardListAdapter.cardList
+            }
+
+            is ResourceState.Error -> {
+                Toast.makeText(requireContext(), state.error, Toast.LENGTH_LONG).show()
+            }
+
+            else -> {}
+        }
     }
 }

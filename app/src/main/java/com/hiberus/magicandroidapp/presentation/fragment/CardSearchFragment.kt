@@ -168,7 +168,8 @@ class CardSearchFragment : Fragment() {
             is ResourceState.Success -> {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.msg_card_added_to_colecction), Toast.LENGTH_SHORT
+                    getString(R.string.msg_card_added_to_colecction),
+                    Toast.LENGTH_SHORT
                 ).show()
                 cardsViewModel.fetchCardList()
             }

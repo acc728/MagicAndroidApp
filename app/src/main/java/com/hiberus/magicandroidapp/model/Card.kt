@@ -32,8 +32,8 @@ data class ImageUris (
     val normal: String,
     val large: String,
     val png: String,
-    val artCrop: String? = "",
-    val borderCrop: String? = ""
+    @SerializedName("art_crop") val artCrop: String = "",
+    @SerializedName("border_crop") val borderCrop: String = ""
 )
 
 @Keep

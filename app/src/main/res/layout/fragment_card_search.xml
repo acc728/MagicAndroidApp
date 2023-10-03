@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_autocomplete_card_search"
         app:layout_constraintBottom_toTopOf="@id/ll_buttons_card"
-        android:layout_margin="@dimen/vertical_margin"
+        android:layout_margin="@dimen/main_margin"
         app:shapeAppearanceOverlay="@style/RoundedImageViewRounded"
         android:src="@drawable/img_magic_cardback"/>
 
