@@ -30,6 +30,8 @@ class CardSearchFragment : Fragment() {
     private var card: Card? = null
     private var autocompleteCards: MutableList<String>? = null
 
+    private lateinit var autocompleteCardsAdapter: ArrayAdapter<String>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -87,7 +89,7 @@ class CardSearchFragment : Fragment() {
             if (text.count() >= 3) {
                 cardsViewModel.fetchAutocompleteCard(text)
 
-                val autocompleteCardsAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
+                 autocompleteCardsAdapter = ArrayAdapter<String>(
                     requireContext(),
                     android.R.layout.simple_dropdown_item_1line,
                     autocompleteCards ?: emptyList()
@@ -108,9 +110,8 @@ class CardSearchFragment : Fragment() {
         }
 
         binding.btnAddCollection.setOnClickListener {
-           saveCard()
+            saveCard()
         }
-
     }
 
     private fun handleLoadCardState(state: RandomCardState?) {
@@ -165,13 +166,15 @@ class CardSearchFragment : Fragment() {
             }
 
             is ResourceState.Success -> {
-                Toast.makeText(requireContext(),
-                    getString(R.string.msg_card_added_to_colecction), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.msg_card_added_to_colecction), Toast.LENGTH_SHORT
+                ).show()
                 cardsViewModel.fetchCardList()
             }
 
             is ResourceState.Error -> {
-                Log.i("AddError",state.error)
+                Log.i("AddError", state.error)
                 Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
             }
 
@@ -180,12 +183,14 @@ class CardSearchFragment : Fragment() {
     }
 
     private fun saveCard() {
-        if(card != null) {
+        if (card != null) {
             card?.comments = ""
             cardsViewModel.addCard(card!!)
-        }else {
-            Toast.makeText(requireContext(),
-                getString(R.string.msg_error_add_card_to_collection), Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.msg_error_add_card_to_collection), Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

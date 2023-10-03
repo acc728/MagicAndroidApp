@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
 
         // Si no especificamos nada se usará el hilo por defecto
         lifecycleScope.launch {
-            delay(3000)
+            delay(2000)
 
             withContext(Dispatchers.Main) {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))

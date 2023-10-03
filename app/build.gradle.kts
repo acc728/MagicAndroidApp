@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.hiberus.magicandroidapp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -56,7 +56,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
 
     //Coroutines and ViewModel
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
