@@ -51,6 +51,11 @@ class CollectionFragment : Fragment() {
         initUI()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun initViewModel() {
 
         cardsViewModel.deleteCardLiveData.observe(viewLifecycleOwner) { state ->

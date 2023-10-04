@@ -1,10 +1,15 @@
 package com.hiberus.magicandroidapp.presentation.fragment
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -48,6 +53,11 @@ class CardSearchFragment : Fragment() {
         cardsViewModel.fetchRandomCard()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun initViewModel() {
         cardsViewModel.randomCardLiveData.observe(viewLifecycleOwner) { state ->
             handleLoadCardState(state)
@@ -68,14 +78,26 @@ class CardSearchFragment : Fragment() {
 
 
     private fun updateUI(card: Card?) {
-        if (card != null) {
-            Glide
-                .with(binding.ivCardImage)
-                .load(card.imageUris.normal)
-                .into(binding.ivCardImage)
-        } else {
-            binding.ivCardImage.setImageResource(R.drawable.img_magic_cardback)
+        val uiHandler = Handler(Looper.getMainLooper())
+
+        val uiTask = Runnable {
+            if (card != null) {
+                Glide
+                    .with(binding.ivCardImage)
+                    .load(card.imageUris.normal)
+                    .into(binding.ivCardImage)
+
+                binding.ivCardImage.visibility = View.VISIBLE
+                binding.lavCardSearch.visibility = View.GONE
+
+            } else {
+                binding.ivCardImage.setImageResource(R.drawable.img_magic_cardback)
+            }
         }
+
+        uiHandler.removeCallbacks(uiTask)
+        uiHandler.postDelayed(uiTask, 200)
+
     }
 
     private fun initUI() {
@@ -107,6 +129,8 @@ class CardSearchFragment : Fragment() {
             if (cardName != null) {
                 cardsViewModel.fetchSearchCard(cardName)
             }
+
+            hideKeyboard()
         }
 
         binding.btnAddCollection.setOnClickListener {
@@ -122,9 +146,6 @@ class CardSearchFragment : Fragment() {
             }
 
             is ResourceState.Success -> {
-                binding.ivCardImage.visibility = View.VISIBLE
-                binding.lavCardSearch.visibility = View.GONE
-
                 card = state.result
                 Log.i("CardState", state.result.toString())
                 updateUI(card)
@@ -175,7 +196,6 @@ class CardSearchFragment : Fragment() {
             }
 
             is ResourceState.Error -> {
-                Log.i("AddError", state.error)
                 Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
             }
 
@@ -193,6 +213,15 @@ class CardSearchFragment : Fragment() {
                 getString(R.string.msg_error_add_card_to_collection), Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
     }
 
 }

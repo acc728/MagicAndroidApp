@@ -19,36 +19,104 @@
             android:id="@+id/iv_card_image_list"
             android:layout_width="90dp"
             android:layout_height="70dp"
-            tools:background="@color/black"
             android:layout_gravity="center_vertical"
-            app:shapeAppearanceOverlay="@style/RoundedImagePreviewRounded" />
+            app:shapeAppearanceOverlay="@style/RoundedImagePreviewRounded"
+            tools:background="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_card_name_list"
-                style="@style/Text.Bold"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/horizontal_small_margin"
-                android:layout_marginVertical="@dimen/horizontal_tiny_margin"
-                tools:text="Liliana Vess" />
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_card_name_list"
+                    style="@style/Text.Bold"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/horizontal_small_margin"
+                    android:layout_marginVertical="@dimen/horizontal_tiny_margin"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    tools:text="Liliana Vess Queen of The Long texts"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_blue_mana"
+                    android:layout_width="@dimen/width_ic_small"
+                    android:layout_height="@dimen/height_ic_small"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_black_mana"
+                    android:src="@drawable/ic_blue_mana"
+                    />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_black_mana"
+                    android:layout_width="@dimen/width_ic_small"
+                    android:layout_height="@dimen/height_ic_small"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_green_mana"
+                    android:src="@drawable/ic_black_mana" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_green_mana"
+                    android:layout_width="@dimen/width_ic_small"
+                    android:layout_height="@dimen/height_ic_small"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_red_mana"
+                    android:src="@drawable/ic_green_mana" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_red_mana"
+                    android:layout_width="@dimen/width_ic_small"
+                    android:layout_height="@dimen/height_ic_small"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_white_mana"
+                    android:src="@drawable/ic_red_mana" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_white_mana"
+                    android:layout_width="@dimen/width_ic_small"
+                    android:layout_height="@dimen/height_ic_small"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_white_mana"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_card_description_list"
                 style="@style/Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="top"
                 android:layout_marginHorizontal="@dimen/horizontal_small_margin"
                 android:layout_marginVertical="@dimen/horizontal_tiny_margin"
-                tools:text="Texto de la carta donde se muestra su efecto y se puede ver que si se pasa de longitud se acorta en el final con ellipsize"
                 android:ellipsize="end"
-                android:layout_gravity="top"
+                android:lines="2"
                 android:maxLines="2"
-                android:lines="2"/>
+                tools:text="Texto de la carta donde se muestra su efecto y se puede ver que si se pasa de longitud se acorta en el final con ellipsize" />
 
         </LinearLayout>
 

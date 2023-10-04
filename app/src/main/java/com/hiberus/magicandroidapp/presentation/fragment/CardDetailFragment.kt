@@ -5,16 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.hiberus.magicandroidapp.R
+import androidx.navigation.fragment.navArgs
+import com.hiberus.magicandroidapp.databinding.FragmentCardDetailBinding
 
 class CardDetailFragment : Fragment() {
+
+    private var _binding: FragmentCardDetailBinding? = null
+    private val binding get() = _binding!!
+
+    private val args: CardDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card_detail, container, false)
+    ): View {
+        _binding = FragmentCardDetailBinding.inflate(inflater)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

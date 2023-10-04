@@ -1,13 +1,335 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_grey"
     tools:context=".presentation.fragment.CardDetailFragment">
 
-    <TextView
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_card_detail_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="250dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/black" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_card_detail_name_colors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/main_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_card_detail_image">
+
+        <TextView
+            style="@style/Text.Bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            app:layout_constraintEnd_toStartOf="@id/iv_blue_mana"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Liliana Vess Queen of The Long Texts bla bla bla bla bla bla bla bla" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_blue_mana"
+            android:layout_width="@dimen/width_ic_small"
+            android:layout_height="@dimen/height_ic_small"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
+            android:src="@drawable/ic_blue_mana"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_black_mana"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_black_mana"
+            android:layout_width="@dimen/width_ic_small"
+            android:layout_height="@dimen/height_ic_small"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
+            android:src="@drawable/ic_black_mana"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_green_mana"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_green_mana"
+            android:layout_width="@dimen/width_ic_small"
+            android:layout_height="@dimen/height_ic_small"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
+            android:src="@drawable/ic_green_mana"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_red_mana"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_red_mana"
+            android:layout_width="@dimen/width_ic_small"
+            android:layout_height="@dimen/height_ic_small"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
+            android:src="@drawable/ic_red_mana"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_white_mana"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_white_mana"
+            android:layout_width="@dimen/width_ic_small"
+            android:layout_height="@dimen/height_ic_small"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
+            android:src="@drawable/ic_white_mana"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_card_detail_type_set_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/horizontal_margin"
+        android:layout_marginVertical="@dimen/vertical_tiny_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_card_detail_name_colors">
+
+        <TextView
+            android:id="@+id/tv_card_detail_type_line"
+            style="@style/Text.Small"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Legendary Creature - Human" />
+
+        <TextView
+            android:id="@+id/tv_card_detail_set_name"
+            style="@style/Text.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxWidth="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Champions Of Kamigawa" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/horizontal_margin"
+        android:layout_marginVertical="@dimen/card_view_vertical_margin"
+        app:cardBackgroundColor="@color/soft_black"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_card_detail_type_set_name">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Text.Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/horizontal_margin"
+                android:layout_marginVertical="@dimen/horizontal_tiny_margin"
+                android:ellipsize="end"
+                android:justificationMode="inter_word"
+                android:text="@string/description_text" />
+
+            <TextView
+                android:id="@+id/tv_card_detail_oracle_text"
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/horizontal_margin"
+                android:layout_marginVertical="@dimen/horizontal_tiny_margin"
+                android:ellipsize="end"
+                android:justificationMode="inter_word"
+                tools:text="Vigilance, indestructible\nBushido 5 (Whenever this creature blocks or becomes blocked, it gets +5/+5 until end of turn.)" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_purchase_prices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/horizontal_large_margin"
+        android:layout_marginVertical="@dimen/card_view_vertical_large_margin"
+        app:cardBackgroundColor="@color/soft_black"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_description_text">
+
+        <TextView
+            style="@style/Text.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginVertical="@dimen/horizontal_tiny_margin"
+            android:ellipsize="end"
+            android:justificationMode="inter_word"
+            android:text="@string/purchase_prices" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/vertical_margin"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                style="@style/Text.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/horizontal_small_margin"
+                android:text="@string/text_usd" />
+
+            <TextView
+                android:id="@+id/tv_price_usd"
+                style="@style/Text.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/horizontal_small_margin"
+                tools:text="0,08" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_large_margin"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                style="@style/Text.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/horizontal_small_margin"
+                android:text="@string/text_eur" />
+
+            <TextView
+                android:id="@+id/tv_price_eur"
+                style="@style/Text.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/horizontal_small_margin"
+                tools:text="0,08" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_purchase_links"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/horizontal_large_margin"
+        android:layout_marginVertical="@dimen/card_view_vertical_large_margin"
+        app:cardBackgroundColor="@color/soft_black"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_description_text">
+
+        <TextView
+            style="@style/Text.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginVertical="@dimen/horizontal_tiny_margin"
+            android:ellipsize="end"
+            android:justificationMode="inter_word"
+            android:text="@string/purchase_links" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/vertical_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tcgplayer_link"
+                style="@style/Text.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/horizontal_small_margin"
+                android:layout_marginTop="@dimen/vertical_small_margin"
+                android:autoLink="web"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/tcgplayer_link" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_large_margin"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_cardmarket_link"
+            style="@style/Text.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_small_margin"
+            android:layout_marginVertical="@dimen/vertical_small_margin"
+            android:autoLink="web"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/cardmarket_link" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:id="@+id/et_card_detail_comments"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_purchase_links"
+        android:layout_margin="@dimen/main_margin"
+        android:inputType="text"
+        android:hint="@string/text_comments"
+        android:lines="5"
+        android:text=""
+        style="@style/Text"
+        android:textColorHint="@color/white"
+        android:gravity="start"
+        android:paddingHorizontal="@dimen/main_margin"
+        android:paddingVertical="@dimen/card_padding"
+        android:background="@drawable/shape_edit_text"
+        android:autofillHints="">
+
+
+    </EditText>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
