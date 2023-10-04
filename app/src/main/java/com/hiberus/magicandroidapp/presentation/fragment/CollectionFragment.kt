@@ -1,6 +1,8 @@
 package com.hiberus.magicandroidapp.presentation.fragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,8 +32,8 @@ class CollectionFragment : Fragment() {
 
     private val cardsViewModel: CardsViewModel by activityViewModel()
 
-    private lateinit var cardsFiltered : List<Card>
-    private lateinit var listCards : ArrayList<Card>
+    private lateinit var cardsFiltered: List<Card>
+    private lateinit var listCards: ArrayList<Card>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,22 +65,29 @@ class CollectionFragment : Fragment() {
     }
 
     private fun initUI() {
+        var filteredText = ""
+        val textSearchHandler = Handler(Looper.getMainLooper())
 
-        binding.atvFilterCard.addTextChangedListener {
-            val filteredText = binding.atvFilterCard.text.toString()
-
+        val textSearchTask = Runnable {
             if (filteredText.isNotBlank() || cardsFiltered.isEmpty()) {
+
                 cardsFiltered = listCards.filter { card ->
                     card.name.lowercase().contains(filteredText.lowercase())
                 }
 
                 cardListAdapter.cardList = ArrayList(cardsFiltered)
-
             } else {
                 cardsViewModel.fetchCardList()
             }
 
             cardListAdapter.notifyDataSetChanged()
+        }
+
+        binding.atvFilterCard.addTextChangedListener { text ->
+            filteredText = text.toString()
+
+            textSearchHandler.removeCallbacks(textSearchTask)
+            textSearchHandler.postDelayed(textSearchTask, 500)
         }
     }
 
