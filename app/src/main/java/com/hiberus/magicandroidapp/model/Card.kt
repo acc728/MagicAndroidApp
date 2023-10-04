@@ -13,14 +13,12 @@ import com.google.gson.reflect.TypeToken
 data class Card (
     @PrimaryKey val id: String,
     val name: String,
-    val lang: String,
     val uri: String,
-    @SerializedName("image_uris") val imageUris: ImageUris,  // No funciona correctamente
-    val cmc: Long,
+    @SerializedName("image_uris") val imageUris: ImageUris,
     @SerializedName("type_line") val typeLine: String,
-    @SerializedName("oracle_text") val oracleText: String, // No funciona correctamente
+    @SerializedName("oracle_text") val oracleText: String,
     val colors: List<String>,
-    @SerializedName("set_name") val setName: String,  // No funciona correctamente
+    @SerializedName("set_name") val setName: String,
     val prices: Prices,
     @SerializedName("purchase_uris") val purchaseUris: PurchaseUris,
     var comments: String = ""
@@ -28,29 +26,21 @@ data class Card (
 
 @Keep
 data class ImageUris (
-    val small: String,
     val normal: String,
-    val large: String,
-    val png: String,
     @SerializedName("art_crop") val artCrop: String = "",
     @SerializedName("border_crop") val borderCrop: String = ""
 )
 
 @Keep
 data class Prices (
-    val usd: String,
-    val usdFoil: Any? = null,
-    val usdEtched: Any? = null,
-    val eur: String,
-    val eurFoil: Any? = null,
-    val tix: Any? = null
+    val usd: String?,
+    val eur: String?
 )
 
 @Keep
 data class PurchaseUris (
     val tcgplayer: String,
     val cardmarket: String,
-    val cardhoarder: String
 )
 
 @Keep

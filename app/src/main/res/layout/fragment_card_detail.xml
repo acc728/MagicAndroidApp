@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
-    tools:context=".presentation.fragment.CardDetailFragment">
+    tools:context=".presentation.fragment.CardDetailFragment"
+    android:isScrollContainer="true">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_card_detail_image"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="240dp"
         android:layout_gravity="center_vertical"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,11 +33,18 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading_animation_magic"/>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/iv_card_detail_image">
+
+    </androidx.core.widget.NestedScrollView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_card_detail_name_colors"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/main_margin"
+        android:layout_margin="@dimen/main_margin_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_card_detail_image">
@@ -175,18 +183,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/horizontal_margin"
-                android:layout_marginVertical="@dimen/horizontal_tiny_margin"
                 android:ellipsize="end"
                 android:justificationMode="inter_word"
+                android:padding="@dimen/text_tiny_padding"
                 android:text="@string/description_text" />
 
             <TextView
                 android:id="@+id/tv_card_detail_oracle_text"
-                style="@style/Text"
+                style="@style/Text.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/horizontal_margin"
-                android:layout_marginVertical="@dimen/horizontal_tiny_margin"
+                android:padding="@dimen/text_tiny_padding"
                 android:ellipsize="end"
                 android:justificationMode="inter_word"
                 tools:text="Vigilance, indestructible\nBushido 5 (Whenever this creature blocks or becomes blocked, it gets +5/+5 until end of turn.)" />
@@ -198,7 +206,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/horizontal_large_margin"
-        android:layout_marginVertical="@dimen/card_view_vertical_large_margin"
+        android:layout_marginVertical="@dimen/vertical_margin"
         app:cardBackgroundColor="@color/soft_black"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/card_elevation"
@@ -270,7 +278,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/horizontal_large_margin"
-        android:layout_marginVertical="@dimen/card_view_vertical_large_margin"
+        android:layout_marginVertical="@dimen/vertical_margin"
         app:cardBackgroundColor="@color/soft_black"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/card_elevation"
@@ -300,7 +308,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/horizontal_small_margin"
                 android:layout_marginTop="@dimen/vertical_small_margin"
-                android:autoLink="web"
+                android:clickable="true"
+                android:textColor="@color/orange_pumpkin"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/tcgplayer_link" />
 
@@ -319,7 +328,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/horizontal_small_margin"
             android:layout_marginVertical="@dimen/vertical_small_margin"
-            android:autoLink="web"
+            android:clickable="true"
+            android:textColor="@color/orange_pumpkin"
             android:layout_gravity="center_horizontal"
             android:text="@string/cardmarket_link" />
 
@@ -346,8 +356,6 @@
         android:paddingVertical="@dimen/card_padding"
         android:background="@drawable/shape_edit_text"
         android:autofillHints="">
-
-
     </EditText>
 
 

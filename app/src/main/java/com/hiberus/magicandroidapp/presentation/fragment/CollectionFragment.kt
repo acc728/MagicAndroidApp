@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,10 +34,9 @@ class CollectionFragment : Fragment() {
 
     private val cardsViewModel: CardsViewModel by activityViewModel()
 
-    private lateinit var cardsFiltered: List<Card>
+    private var cardsFiltered: List<Card> = emptyList()
     private lateinit var listCards: ArrayList<Card>
 
-    val navController = getFragmentNavController(R.id.fcv_main)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,7 +77,7 @@ class CollectionFragment : Fragment() {
         val textSearchHandler = Handler(Looper.getMainLooper())
 
         val textSearchTask = Runnable {
-            if (filteredText.isNotBlank() || cardsFiltered.isEmpty()) {
+            if (filteredText.isNotBlank() || (filteredText.isNotBlank() && cardsFiltered.isEmpty())) {
 
                 cardsFiltered = listCards.filter { card ->
                     card.name.lowercase().contains(filteredText.lowercase())
@@ -104,17 +104,12 @@ class CollectionFragment : Fragment() {
         binding.rvCardsCollection.layoutManager = LinearLayoutManager(requireContext())
 
         cardListAdapter.onClickListener = { card ->
-            navController?.navigate(
-                CollectionFragmentDirections.actionCollectionFragmentToCardDetailFragment(
+
+            parentFragment?.findNavController()?.navigate(
+                TabFragmentDirections.actionTabFragmentToCardDetailFragment(
                     card.id
                 )
             )
-
-            /*findNavController().navigate(
-                CollectionFragmentDirections.actionCollectionFragmentToCardDetailFragment(
-                    card.id
-                )
-            )*/
         }
 
         val itemTouchHelper =
@@ -181,9 +176,5 @@ class CollectionFragment : Fragment() {
 
             else -> {}
         }
-    }
-
-    fun Fragment.getFragmentNavController(@IdRes id: Int) = activity?.let {
-        return@let Navigation.findNavController(it, id)
     }
 }

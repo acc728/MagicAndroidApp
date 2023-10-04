@@ -25,7 +25,7 @@
             android:maxLines="1"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:imeOptions="actionSearch"/>
+            android:imeOptions="actionDone"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

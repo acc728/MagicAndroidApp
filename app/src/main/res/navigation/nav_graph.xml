@@ -3,22 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/cardSearchFragment">
-    <fragment
-        android:id="@+id/cardSearchFragment"
-        android:name="com.hiberus.magicandroidapp.presentation.fragment.CardSearchFragment"
-        android:label="fragment_card_search"
-        tools:layout="@layout/fragment_card_search" />
-
-    <fragment
-        android:id="@+id/collectionFragment"
-        android:name="com.hiberus.magicandroidapp.presentation.fragment.CollectionFragment"
-        android:label="fragment_collection"
-        tools:layout="@layout/fragment_collection">
-        <action
-            android:id="@+id/action_collectionFragment_to_cardDetailFragment"
-            app:destination="@id/cardDetailFragment" />
-    </fragment>
+    app:startDestination="@id/tabFragment">
 
     <fragment
         android:id="@+id/cardDetailFragment"
@@ -29,5 +14,15 @@
         <argument
             android:name="cardId"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tabFragment"
+        android:name="com.hiberus.magicandroidapp.presentation.fragment.TabFragment"
+        android:label="fragment_tab"
+        tools:layout="@layout/fragment_tab" >
+        <action
+            android:id="@+id/action_tabFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
     </fragment>
 </navigation>

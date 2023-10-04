@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="main_margin">16dp</dimen>
+    <dimen name="main_margin_text">12dp</dimen>
 
     <dimen name="horizontal_large_margin">40dp</dimen>
     <dimen name="horizontal_margin">16dp</dimen>
@@ -21,6 +22,8 @@
     <dimen name="card_view_vertical_large_margin">26dp</dimen>
 
     <dimen name="rv_padding_normal">12dp</dimen>
+    <dimen name="vertical_buttons_margin">30dp</dimen>
+    <dimen name="text_tiny_padding">2dp</dimen>
 
     <dimen name="width_ic_small">20dp</dimen>
     <dimen name="height_ic_small">20dp</dimen>

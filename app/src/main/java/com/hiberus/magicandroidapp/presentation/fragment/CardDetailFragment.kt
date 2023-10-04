@@ -1,6 +1,8 @@
 package com.hiberus.magicandroidapp.presentation.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.hiberus.magicandroidapp.R
 import com.hiberus.magicandroidapp.databinding.FragmentCardDetailBinding
 import com.hiberus.magicandroidapp.model.Card
 import com.hiberus.magicandroidapp.model.ResourceState
@@ -78,10 +81,19 @@ class CardDetailFragment : Fragment() {
         binding.tvCardDetailSetName.text = card.setName
         binding.tvCardDetailOracleText.text = card.oracleText
         binding.etCardDetailComments.setText(card.comments)
-        binding.tvPriceUsd.text = card.prices.usd + " $"
-        binding.tvPriceEur.text = card.prices.eur + " €"
-        binding.tvCardmarketLink.text = card.purchaseUris.cardmarket
-        binding.tvTcgplayerLink.text = card.purchaseUris.tcgplayer
+        binding.tvPriceUsd.text = (card.prices.usd?: "N/A") + " $"
+        binding.tvPriceEur.text = (card.prices.eur?: "N/A") + " €"
+        binding.tvCardmarketLink.setOnClickListener {
+            Toast.makeText(requireContext(), getString(R.string.msg_buy_link), Toast.LENGTH_SHORT).show()
+            val url = card.purchaseUris.cardmarket
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+        binding.tvTcgplayerLink.setOnClickListener {
+            val url = card.purchaseUris.tcgplayer
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
 
         val manaColors = card.colors
 

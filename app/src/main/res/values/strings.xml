@@ -9,13 +9,12 @@
     <string name="search_placeholder">Search a card by name…</string>
     <string name="btn_generate_card">Generate Card</string>
     <string name="btn_add_collection">Add Collection</string>
-    <string name="msg_error_add_card_to_collection">No se pudo añadir la carta a la colección</string>
-    <string name="msg_card_added_to_colecction">Carta añadida a la colección</string>
-
+    <string name="msg_error_add_card_to_collection">An error has occurred adding the card to collection</string>
+    <string name="msg_card_added_to_colecction">Card Added to Collection</string>
 
     <!-- Collection Fragment -->
     <string name="filter_placeholder">Filter cards by name…</string>
-    <string name="msg_card_deleted_succesfully">La carta se ha eliminado correctamente</string>
+    <string name="msg_card_deleted_succesfully">Card deleted correctly from collection</string>
 
     <!-- Card Detail Fragment -->
     <string name="text_usd">Usd :</string>
@@ -26,6 +25,6 @@
     <string name="purchase_prices">Purchase Prices</string>
     <string name="description_text">Description Text</string>
     <string name="text_comments">Write some comments…</string>
-
+    <string name="msg_buy_link">Wait until is redirected to web</string>
 
 </resources>

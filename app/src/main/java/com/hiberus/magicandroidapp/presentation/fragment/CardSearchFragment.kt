@@ -83,7 +83,7 @@ class CardSearchFragment : Fragment() {
         val uiTask = Runnable {
             if (card != null) {
                 Glide
-                    .with(binding.ivCardImage)
+                    .with(requireContext())
                     .load(card.imageUris.normal)
                     .into(binding.ivCardImage)
 
@@ -196,7 +196,9 @@ class CardSearchFragment : Fragment() {
             }
 
             is ResourceState.Error -> {
-                Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
+                Log.i("Error", state.error)
+                Toast.makeText(requireContext(),
+                    getString(R.string.msg_error_add_card_to_collection), Toast.LENGTH_SHORT).show()
             }
 
             else -> {}
