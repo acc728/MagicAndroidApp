@@ -15,7 +15,7 @@ interface CardsDao {
     fun getCardList(): List<Card>
 
     @Query("SELECT * FROM cards WHERE id = :cardId LIMIT 1")
-    fun getCard(cardId: Int): Card
+    fun getCard(cardId: String): Card
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addCard(card: Card)

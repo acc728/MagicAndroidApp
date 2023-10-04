@@ -18,6 +18,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@color/black" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_card_detail_image_loading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="@dimen/main_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_card_detail_image"
+        app:layout_constraintBottom_toBottomOf="@id/iv_card_detail_image"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_animation_magic"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_card_detail_name_colors"
         android:layout_width="match_parent"
@@ -28,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_card_detail_image">
 
         <TextView
+            android:id="@+id/tv_card_detail_card_name"
             style="@style/Text.Bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,6 +64,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
             android:src="@drawable/ic_blue_mana"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_black_mana"
             app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +76,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
             android:src="@drawable/ic_black_mana"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_green_mana"
             app:layout_constraintTop_toTopOf="parent" />
@@ -71,9 +88,9 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
             android:src="@drawable/ic_green_mana"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_red_mana"
-
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -83,6 +100,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
             android:src="@drawable/ic_red_mana"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_white_mana"
             app:layout_constraintTop_toTopOf="parent" />
@@ -94,6 +112,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/horizontal_very_tiny_margin"
             android:src="@drawable/ic_white_mana"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -28,6 +28,6 @@
 
         <argument
             android:name="cardId"
-            app:argType="integer" />
+            app:argType="string" />
     </fragment>
 </navigation>

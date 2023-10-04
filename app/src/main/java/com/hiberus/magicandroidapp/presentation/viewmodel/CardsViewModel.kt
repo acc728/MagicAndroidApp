@@ -144,7 +144,7 @@ class CardsViewModel(
         }
     }
 
-    fun fetchCard(cardId: Int) {
+    fun fetchCard(cardId: String) {
         _getCardLiveData.value = ResourceState.Loading()
 
         viewModelScope.launch(Dispatchers.IO) {

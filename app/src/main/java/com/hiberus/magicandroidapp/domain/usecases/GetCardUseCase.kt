@@ -7,7 +7,7 @@ class GetCardUseCase(
     private val cardRepository: CardRepository
 ) {
 
-    suspend fun execute(cardId: Int): Card {
+    fun execute(cardId: String): Card {
         return cardRepository.getCard(cardId)
     }
 

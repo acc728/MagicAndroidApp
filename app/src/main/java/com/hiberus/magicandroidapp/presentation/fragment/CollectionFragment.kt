@@ -8,8 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.IdRes
 import androidx.core.widget.addTextChangedListener
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,8 @@ class CollectionFragment : Fragment() {
 
     private lateinit var cardsFiltered: List<Card>
     private lateinit var listCards: ArrayList<Card>
+
+    val navController = getFragmentNavController(R.id.fcv_main)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,11 +104,17 @@ class CollectionFragment : Fragment() {
         binding.rvCardsCollection.layoutManager = LinearLayoutManager(requireContext())
 
         cardListAdapter.onClickListener = { card ->
-            findNavController().navigate(
+            navController?.navigate(
                 CollectionFragmentDirections.actionCollectionFragmentToCardDetailFragment(
-                    card.id.toInt()
+                    card.id
                 )
             )
+
+            /*findNavController().navigate(
+                CollectionFragmentDirections.actionCollectionFragmentToCardDetailFragment(
+                    card.id
+                )
+            )*/
         }
 
         val itemTouchHelper =
@@ -172,5 +181,9 @@ class CollectionFragment : Fragment() {
 
             else -> {}
         }
+    }
+
+    fun Fragment.getFragmentNavController(@IdRes id: Int) = activity?.let {
+        return@let Navigation.findNavController(it, id)
     }
 }

@@ -7,7 +7,7 @@ class DeleteCardUseCase(
     private val cardRepository: CardRepository
 ) {
 
-    suspend fun execute(card: Card) {
+    fun execute(card: Card) {
         cardRepository.deleteCard(card)
     }
 

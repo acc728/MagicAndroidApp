@@ -12,7 +12,7 @@ interface CardRepository {
 
     suspend fun getCardList(): List<Card>
 
-    fun getCard(cardId: Int): Card
+    fun getCard(cardId: String): Card
 
     fun addCard(card: Card)
 

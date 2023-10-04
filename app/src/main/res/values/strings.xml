@@ -18,8 +18,8 @@
     <string name="msg_card_deleted_succesfully">La carta se ha eliminado correctamente</string>
 
     <!-- Card Detail Fragment -->
-    <string name="text_usd">usd :</string>
-    <string name="text_eur">eur :</string>
+    <string name="text_usd">Usd :</string>
+    <string name="text_eur">Eur :</string>
     <string name="purchase_links">Purchase Links</string>
     <string name="tcgplayer_link">Tcgplayer Link</string>
     <string name="cardmarket_link">Cardmarket Link</string>

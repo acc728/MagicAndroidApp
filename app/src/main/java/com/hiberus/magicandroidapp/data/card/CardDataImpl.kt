@@ -25,7 +25,7 @@ class CardDataImpl(
         return cardLocalImpl.getCardList()
     }
 
-    override fun getCard(cardId: Int): Card {
+    override fun getCard(cardId: String): Card {
         return cardLocalImpl.getCard(cardId)
     }
 

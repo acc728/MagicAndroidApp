@@ -11,7 +11,7 @@ class CardLocalImpl(
         return appDatabase.cardsDao().getCardList()
     }
 
-    fun getCard(cardId: Int): Card {
+    fun getCard(cardId: String): Card {
         return appDatabase.cardsDao().getCard(cardId)
     }
 
