@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.hiberus.magicandroidapp.R
@@ -16,6 +18,7 @@ import com.hiberus.magicandroidapp.databinding.FragmentCardDetailBinding
 import com.hiberus.magicandroidapp.model.Card
 import com.hiberus.magicandroidapp.model.ResourceState
 import com.hiberus.magicandroidapp.presentation.viewmodel.CardsViewModel
+import com.hiberus.magicandroidapp.presentation.viewmodel.EditCardState
 import com.hiberus.magicandroidapp.presentation.viewmodel.GetCardState
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
@@ -28,6 +31,15 @@ class CardDetailFragment : Fragment() {
 
     private val cardsViewModel: CardsViewModel by activityViewModel()
 
+    private var card: Card? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            editCard()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +60,10 @@ class CardDetailFragment : Fragment() {
         cardsViewModel.getCardLiveData.observe(viewLifecycleOwner) { state ->
             handleCardDetailState(state)
         }
+
+        cardsViewModel.editCardLiveData.observe(viewLifecycleOwner) { state ->
+            handleEditCardState(state)
+        }
     }
 
     private fun handleCardDetailState(state: GetCardState) {
@@ -58,6 +74,7 @@ class CardDetailFragment : Fragment() {
 
             is ResourceState.Success -> {
                 binding.lavCardDetailImageLoading.visibility = View.GONE
+                card = state.result
                 initUI(state.result)
             }
 
@@ -68,6 +85,34 @@ class CardDetailFragment : Fragment() {
             else -> {}
         }
     }
+
+    private fun handleEditCardState(state: EditCardState) {
+        when (state) {
+            is ResourceState.Loading -> {
+                //
+            }
+
+            is ResourceState.Success -> {
+                findNavController().popBackStack()
+            }
+
+            is ResourceState.Error -> {
+                Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
+            }
+
+            else -> {}
+        }
+    }
+
+    private fun editCard() {
+        val comments = binding.etCardDetailComments.text.toString()
+
+        if(card != null) {
+            card!!.comments = comments
+            cardsViewModel.editCard(card!!)
+        }
+    }
+
 
     @SuppressLint("SetTextI18n")
     private fun initUI(card: Card) {
@@ -81,10 +126,11 @@ class CardDetailFragment : Fragment() {
         binding.tvCardDetailSetName.text = card.setName
         binding.tvCardDetailOracleText.text = card.oracleText
         binding.etCardDetailComments.setText(card.comments)
-        binding.tvPriceUsd.text = (card.prices.usd?: "N/A") + " $"
-        binding.tvPriceEur.text = (card.prices.eur?: "N/A") + " €"
+        binding.tvPriceUsd.text = (card.prices.usd ?: "N/A") + " $"
+        binding.tvPriceEur.text = (card.prices.eur ?: "N/A") + " €"
         binding.tvCardmarketLink.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.msg_buy_link), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.msg_buy_link), Toast.LENGTH_SHORT)
+                .show()
             val url = card.purchaseUris.cardmarket
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)

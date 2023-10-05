@@ -24,6 +24,7 @@ import com.hiberus.magicandroidapp.presentation.viewmodel.CardAutocompleteState
 import com.hiberus.magicandroidapp.presentation.viewmodel.CardsViewModel
 import com.hiberus.magicandroidapp.presentation.viewmodel.RandomCardState
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import java.lang.NullPointerException
 
 class CardSearchFragment : Fragment() {
 
@@ -82,10 +83,19 @@ class CardSearchFragment : Fragment() {
 
         val uiTask = Runnable {
             if (card != null) {
-                Glide
-                    .with(requireContext())
-                    .load(card.imageUris.normal)
-                    .into(binding.ivCardImage)
+                try {
+                    Glide
+                        .with(requireContext())
+                        .load(card.imageUris.normal)
+                        .into(binding.ivCardImage)
+                } catch (e: NullPointerException) {
+                    binding.ivCardImage.setImageResource(R.drawable.img_magic_cardback)
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.msg_error_card_random),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
                 binding.ivCardImage.visibility = View.VISIBLE
                 binding.lavCardSearch.visibility = View.GONE
@@ -97,7 +107,6 @@ class CardSearchFragment : Fragment() {
 
         uiHandler.removeCallbacks(uiTask)
         uiHandler.postDelayed(uiTask, 200)
-
     }
 
     private fun initUI() {
@@ -111,7 +120,7 @@ class CardSearchFragment : Fragment() {
             if (text.count() >= 3) {
                 cardsViewModel.fetchAutocompleteCard(text)
 
-                 autocompleteCardsAdapter = ArrayAdapter<String>(
+                autocompleteCardsAdapter = ArrayAdapter<String>(
                     requireContext(),
                     android.R.layout.simple_dropdown_item_1line,
                     autocompleteCards ?: emptyList()
@@ -162,6 +171,7 @@ class CardSearchFragment : Fragment() {
         }
     }
 
+
     private fun handleAutocompleteCardState(state: CardAutocompleteState?) {
         when (state) {
             is ResourceState.Loading -> {
@@ -197,8 +207,10 @@ class CardSearchFragment : Fragment() {
 
             is ResourceState.Error -> {
                 Log.i("Error", state.error)
-                Toast.makeText(requireContext(),
-                    getString(R.string.msg_error_add_card_to_collection), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.msg_error_add_card_to_collection), Toast.LENGTH_SHORT
+                ).show()
             }
 
             else -> {}
@@ -218,7 +230,8 @@ class CardSearchFragment : Fragment() {
     }
 
     private fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 

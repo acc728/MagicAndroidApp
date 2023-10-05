@@ -11,6 +11,7 @@
     <string name="btn_add_collection">Add Collection</string>
     <string name="msg_error_add_card_to_collection">An error has occurred adding the card to collection</string>
     <string name="msg_card_added_to_colecction">Card Added to Collection</string>
+    <string name="msg_error_card_random">An error has occurred generating a card. Try it again</string>
 
     <!-- Collection Fragment -->
     <string name="filter_placeholder">Filter cards by name…</string>
