@@ -8,9 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.IdRes
 import androidx.core.widget.addTextChangedListener
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -162,10 +160,13 @@ class CollectionFragment : Fragment() {
     private fun handleGetCardListState(state: GetCardListState?) {
         when (state) {
             is ResourceState.Loading -> {
-                //
+                if(cardListAdapter.cardList.isEmpty())
+                    binding.lavCollectionLoading.visibility = View.VISIBLE
             }
 
             is ResourceState.Success -> {
+                if(cardListAdapter.cardList.isEmpty())
+                    binding.lavCollectionLoading.visibility = View.GONE
                 cardListAdapter.submitList(state.result)
                 listCards = cardListAdapter.cardList
             }

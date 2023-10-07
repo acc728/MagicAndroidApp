@@ -4,6 +4,7 @@
     <color name="dirty_white">#D5D5D5</color>
     <color name="soft_grey">#959595</color>
     <color name="dark_grey">#474747</color>
+    <color name="dark_grey_aplha">#EB474747</color>
     <color name="soft_black">#2E2C2C</color>
     <color name="deep_black">#27292b</color>
     <color name="black">#FF000000</color>

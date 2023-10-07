@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MagicAndroidApp</string>
+    <string name="app_name">Magic Library</string>
 
     <!-- TabFragment -->
     <string name="search_cards">Search cards</string>
