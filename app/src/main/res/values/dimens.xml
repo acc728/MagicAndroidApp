@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Loading y logo -->
+    <dimen name="loading_dimens">150dp</dimen>
+    <dimen name="loading_small_dimens">100dp</dimen>
+    <dimen name="logo_width">300dp</dimen>
+    <dimen name="logo_height">200dp</dimen>
+
+    <!-- Buttons -->
+    <dimen name="btn_height">54dp</dimen>
+    <dimen name="vertical_buttons_margin">30dp</dimen>
+
+    <!-- Margins -->
     <dimen name="main_margin">16dp</dimen>
     <dimen name="main_margin_text">12dp</dimen>
 
@@ -15,16 +26,19 @@
     <dimen name="vertical_small_margin">8dp</dimen>
     <dimen name="vertical_tiny_margin">4dp</dimen>
 
+
+    <!-- Cards -->
     <dimen name="card_elevation">10dp</dimen>
     <dimen name="card_padding">6dp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
     <dimen name="card_view_vertical_margin">16dp</dimen>
     <dimen name="card_view_vertical_large_margin">26dp</dimen>
 
+    <!-- RecyclerView -->
     <dimen name="rv_padding_normal">12dp</dimen>
-    <dimen name="vertical_buttons_margin">30dp</dimen>
     <dimen name="text_tiny_padding">2dp</dimen>
 
+    <!-- Icons -->
     <dimen name="width_ic_small">20dp</dimen>
     <dimen name="height_ic_small">20dp</dimen>
 

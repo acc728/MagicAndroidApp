@@ -13,8 +13,8 @@
         android:scaleType="centerInside"/>
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="@dimen/logo_width"
+        android:layout_height="@dimen/logo_height"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,9 +24,9 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lav_splash"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_margin="16dp"
+        android:layout_width="@dimen/loading_dimens"
+        android:layout_height="@dimen/loading_dimens"
+        android:layout_margin="@dimen/main_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

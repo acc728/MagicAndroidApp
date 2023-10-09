@@ -37,11 +37,11 @@ class CardListAdapter : RecyclerView.Adapter<CardListAdapter.CardListViewHolder>
 
         val manaColors = item.colors
 
-        if (manaColors.contains("R")) holder.iv_red_mana.visibility = View.VISIBLE
-        if (manaColors.contains("G")) holder.iv_green_mana.visibility = View.VISIBLE
-        if (manaColors.contains("B")) holder.iv_black_mana.visibility = View.VISIBLE
-        if (manaColors.contains("W")) holder.iv_white_mana.visibility = View.VISIBLE
-        if (manaColors.contains("U")) holder.iv_blue_mana.visibility = View.VISIBLE
+        if (manaColors.contains("R")) holder.ivRedMana.visibility = View.VISIBLE
+        if (manaColors.contains("G")) holder.ivGreenMana.visibility = View.VISIBLE
+        if (manaColors.contains("B")) holder.ivBlackMana.visibility = View.VISIBLE
+        if (manaColors.contains("W")) holder.ivWhiteMana.visibility = View.VISIBLE
+        if (manaColors.contains("U")) holder.ivBlueMana.visibility = View.VISIBLE
 
         Glide.with(holder.cardImageView)
             .load(
@@ -59,11 +59,11 @@ class CardListAdapter : RecyclerView.Adapter<CardListAdapter.CardListViewHolder>
         val cardName = binding.tvCardNameList
         val cardImageView = binding.ivCardImageList
         val cardDescription = binding.tvCardDescriptionList
-        val iv_blue_mana = binding.ivBlueMana
-        val iv_red_mana = binding.ivRedMana
-        val iv_black_mana = binding.ivBlackMana
-        val iv_white_mana = binding.ivWhiteMana
-        val iv_green_mana = binding.ivGreenMana
+        val ivBlueMana = binding.ivBlueMana
+        val ivRedMana = binding.ivRedMana
+        val ivBlackMana = binding.ivBlackMana
+        val ivWhiteMana = binding.ivWhiteMana
+        val ivGreenMana = binding.ivGreenMana
     }
 
     fun submitList(list: List<Card>) {

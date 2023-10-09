@@ -1,5 +1,6 @@
 package com.hiberus.magicandroidapp.presentation
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     private val binding: ActivitySplashBinding by lazy {
@@ -20,7 +22,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // Si no especificamos nada se usará el hilo por defecto
         lifecycleScope.launch {
             delay(2000)
 

@@ -21,8 +21,8 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lav_card_detail_image_loading"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/loading_small_dimens"
+        android:layout_height="@dimen/loading_small_dimens"
         android:layout_margin="@dimen/main_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
