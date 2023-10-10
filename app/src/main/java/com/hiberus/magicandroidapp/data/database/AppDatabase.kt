@@ -8,7 +8,7 @@ import com.hiberus.magicandroidapp.model.Card
 import com.hiberus.magicandroidapp.model.Converters
 
 @TypeConverters(Converters::class)
-@Database(entities = [Card::class], version = 1)
+@Database(entities = [Card::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun cardsDao(): CardsDao
 }
