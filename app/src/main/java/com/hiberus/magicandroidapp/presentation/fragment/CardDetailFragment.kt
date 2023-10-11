@@ -17,6 +17,7 @@ import com.hiberus.magicandroidapp.R
 import com.hiberus.magicandroidapp.databinding.FragmentCardDetailBinding
 import com.hiberus.magicandroidapp.model.Card
 import com.hiberus.magicandroidapp.model.ResourceState
+import com.hiberus.magicandroidapp.presentation.dialog.CardPreviewDialog
 import com.hiberus.magicandroidapp.presentation.viewmodel.CardsViewModel
 import com.hiberus.magicandroidapp.presentation.viewmodel.EditCardState
 import com.hiberus.magicandroidapp.presentation.viewmodel.GetCardState
@@ -148,6 +149,10 @@ class CardDetailFragment : Fragment() {
         if (manaColors.contains("B")) binding.ivBlackMana.visibility = View.VISIBLE
         if (manaColors.contains("W")) binding.ivWhiteMana.visibility = View.VISIBLE
         if (manaColors.contains("U")) binding.ivBlueMana.visibility = View.VISIBLE
+
+        binding.btnOpenDialogCardPreview.setOnClickListener {
+            CardPreviewDialog(card.imageUris.normal).show(parentFragmentManager, "")
+        }
     }
 
     override fun onDestroyView() {

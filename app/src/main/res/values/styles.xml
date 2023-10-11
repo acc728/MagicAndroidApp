@@ -38,9 +38,14 @@
         <item name="cornerSize">25dp</item>
     </style>
 
+    <style name="RoundedDialogImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30dp</item>
+    </style>
+
     <style name="RoundedImagePreviewRounded">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">5dp</item>
+        <item name="cornerSize">6dp</item>
     </style>
 
 </resources>

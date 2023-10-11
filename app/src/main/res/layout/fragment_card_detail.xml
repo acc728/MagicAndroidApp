@@ -19,6 +19,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@color/black" />
 
+    <Button
+        android:id="@+id/btn_open_dialog_card_preview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Text"
+        android:text="@string/btn_text_view"
+        app:layout_constraintBottom_toBottomOf="@id/iv_card_detail_image"
+        app:layout_constraintEnd_toEndOf="@id/iv_card_detail_image"
+        android:drawableEnd="@drawable/ic_view_detail"
+        android:layout_marginEnd="@dimen/horizontal_tiny_margin"/>
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lav_card_detail_image_loading"
         android:layout_width="@dimen/loading_small_dimens"

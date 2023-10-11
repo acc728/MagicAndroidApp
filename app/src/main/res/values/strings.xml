@@ -27,5 +27,6 @@
     <string name="description_text">Description Text</string>
     <string name="text_comments">Write some comments…</string>
     <string name="msg_buy_link">Wait until is redirected to web</string>
+    <string name="btn_text_view">View</string>
 
 </resources>
