@@ -36,6 +36,8 @@ class CardSearchFragment : Fragment() {
     private var card: Card? = null
     private var autocompleteCards: MutableList<String>? = null
 
+    private val uiHandler = Handler(Looper.getMainLooper())
+
     private lateinit var autocompleteCardsAdapter: ArrayAdapter<String>
 
     override fun onCreateView(
@@ -79,13 +81,12 @@ class CardSearchFragment : Fragment() {
 
 
     private fun updateUI(card: Card?) {
-        val uiHandler = Handler(Looper.getMainLooper())
 
         val uiTask = Runnable {
             if (card != null) {
                 try {
                     Glide
-                        .with(requireContext())
+                        .with(binding.ivCardImage)
                         .load(card.imageUris.normal)
                         .into(binding.ivCardImage)
                 } catch (e: NullPointerException) {
@@ -106,7 +107,7 @@ class CardSearchFragment : Fragment() {
         }
 
         uiHandler.removeCallbacks(uiTask)
-        uiHandler.postDelayed(uiTask, 200)
+        uiHandler.postDelayed(uiTask, 500)
     }
 
     private fun initUI() {
@@ -117,17 +118,22 @@ class CardSearchFragment : Fragment() {
         binding.atvSearchCard.addTextChangedListener {
             val text = binding.atvSearchCard.text.toString()
 
-            if (text.count() >= 3) {
-                cardsViewModel.fetchAutocompleteCard(text)
+            val uiTaskAutocomplete = Runnable {
+                if (text.count() >= 3) {
+                    cardsViewModel.fetchAutocompleteCard(text)
 
-                autocompleteCardsAdapter = ArrayAdapter<String>(
-                    requireContext(),
-                    android.R.layout.simple_dropdown_item_1line,
-                    autocompleteCards ?: emptyList()
-                )
+                    autocompleteCardsAdapter = ArrayAdapter<String>(
+                        requireContext(),
+                        android.R.layout.simple_dropdown_item_1line,
+                        autocompleteCards ?: emptyList()
+                    )
 
-                binding.atvSearchCard.setAdapter(autocompleteCardsAdapter)
+                    binding.atvSearchCard.setAdapter(autocompleteCardsAdapter)
+                }
             }
+
+            uiHandler.removeCallbacks(uiTaskAutocomplete)
+            uiHandler.postDelayed(uiTaskAutocomplete, 1000)
         }
 
         binding.atvSearchCard.setOnItemClickListener { _, _, position, _ ->

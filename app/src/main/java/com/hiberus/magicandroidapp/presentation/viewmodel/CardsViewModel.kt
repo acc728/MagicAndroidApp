@@ -69,10 +69,10 @@ class CardsViewModel(
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val notes = getRandomCardUseCase.execute()
+                val card = getRandomCardUseCase.execute()
 
                 withContext(Dispatchers.Main) {
-                    _randomCardLiveData.value = ResourceState.Success(notes)
+                    _randomCardLiveData.value = ResourceState.Success(card)
                     _randomCardLiveData.value = ResourceState.None()
                 }
             } catch (e: Exception) {
